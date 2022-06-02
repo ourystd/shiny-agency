@@ -6,9 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Survey from "./pages/Survey";
-import SurveyQuestion from "./pages/Question";
 import AppLayout from "./components/AppLayout";
 import Error from "./components/Error";
+import Results from "./pages/Results";
+import Freelances from "./pages/Freelances";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,10 +18,9 @@ root.render(
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
-          <Route path="/survey">
-            <Route index element={<Survey />} />
-            <Route path=":questionNumber" element={<SurveyQuestion />} />
-          </Route>
+          <Route path="survey/:questionNumber" element={<Survey />} />
+          <Route path="results" element={<Results />} />
+          <Route path="freelances" element={<Freelances />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
