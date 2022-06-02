@@ -1,7 +1,8 @@
-import logo from "./logo.svg";
+import { Link } from "react-router-dom";
+import logo from "../logo.svg";
 import "../styles/App.scss";
 
-function App() {
+function Home() {
   return (
     <div className="App">
       <header className="App-header">
@@ -9,17 +10,10 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Link to="survey">Take a survey</Link>
       </header>
     </div>
   );
 }
 
-export default App;
+export default Home;
