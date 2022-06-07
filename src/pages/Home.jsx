@@ -1,5 +1,3 @@
-import "../styles/App.scss";
-
 function Home() {
   return (
     <div>

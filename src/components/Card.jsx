@@ -24,6 +24,7 @@ const CardWrapper = styled.div`
   background-color: ${colors.backgroundLight};
   border-radius: 30px;
   width: 350px;
+  height: 325px;
   transition: 200ms;
   &:hover {
     cursor: pointer;

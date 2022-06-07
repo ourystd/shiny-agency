@@ -18,21 +18,23 @@ const freelanceProfiles = [
     jobTitle: "Développeuse Fullstack",
     picture: DefaultPicture,
   },
+  {
+    name: "Rick Motry",
+    jobTitle: "Data Scientist",
+    picture: DefaultPicture,
+  },
 ];
 
 const CardsContainer = styled.div`
+  max-width: 800px;
   display: grid;
-  gap: 24px;
-  grid-template-rows: 350px 350px;
-  grid-template-columns: repeat(3, 1fr);
-
-  &:hover {
-  }
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-gap: 3.75rem;
+  margin: 0 auto;
+  padding-bottom: 150px;
 `;
 
 const Freelances = () => {
-  console.log("Freelances", freelanceProfiles);
-
   return (
     <div>
       <h1>Freelances 👩‍💻👨‍💻👩‍💻</h1>
