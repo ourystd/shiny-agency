@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const MainWrapper = styled.div`
   width: 100%;
-  flex: 1;
   margin-top: 100px;
   padding: 100px 70px;
 

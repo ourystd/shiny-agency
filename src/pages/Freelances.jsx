@@ -1,29 +1,7 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import DefaultPicture from "../assets/default-avatar-img.png";
 import Card from "../components/Card";
-
-const freelanceProfiles = [
-  {
-    name: "Jane Doe",
-    jobTitle: "Devops",
-    picture: DefaultPicture,
-  },
-  {
-    name: "John Doe",
-    jobTitle: "Developpeur frontend",
-    picture: DefaultPicture,
-  },
-  {
-    name: "Jeanne Biche",
-    jobTitle: "Développeuse Fullstack",
-    picture: DefaultPicture,
-  },
-  {
-    name: "Rick Motry",
-    jobTitle: "Data Scientist",
-    picture: DefaultPicture,
-  },
-];
+import { freelanceProfiles } from "../data/freelanceProfiles";
 
 const PageWrapper = styled.div`
   margin-top: 100px;
@@ -61,12 +39,17 @@ const Freelances = () => {
       </PageSubTitle>
       <CardsContainer>
         {freelanceProfiles.map((profile, index) => (
-          <Card
+          <Link
             key={`${profile.name}-${index}`}
-            label={profile.jobTitle}
-            title={profile.name}
-            picture={profile.picture}
-          />
+            to={`/freelances/${profile.id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Card
+              label={profile.jobTitle}
+              title={profile.name}
+              picture={profile.picture}
+            />
+          </Link>
         ))}
       </CardsContainer>
     </PageWrapper>

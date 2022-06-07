@@ -10,6 +10,7 @@ import AppLayout from "./components/AppLayout";
 import Error from "./components/Error";
 import Results from "./pages/Results";
 import Freelances from "./pages/Freelances";
+import ProfileDetails from "./pages/ProfileDetails";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,7 +21,10 @@ root.render(
           <Route index element={<Home />} />
           <Route path="survey/:questionNumber" element={<Survey />} />
           <Route path="results" element={<Results />} />
-          <Route path="freelances" element={<Freelances />} />
+          <Route path="freelances">
+            <Route index element={<Freelances />} />
+            <Route path=":profileId" element={<ProfileDetails />} />
+          </Route>
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

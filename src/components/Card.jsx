@@ -25,7 +25,7 @@ const CardWrapper = styled.div`
   justify-content: space-between;
   padding: 25px;
   background-color: ${colors.backgroundLight};
-  border-radius: 30px;
+  border-radius: 25px;
   width: 350px;
   max-height: 325px;
   padding-bottom: 20px;
@@ -41,7 +41,7 @@ const Card = ({ label, title, picture }) => {
     <CardWrapper>
       <CardLabel>{label}</CardLabel>
       <CardImage src={picture} alt="freelance" />
-      <span>{title}</span>
+      <span style={{ color: "#2F2E41" }}>{title}</span>
     </CardWrapper>
   );
 };
