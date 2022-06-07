@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const MainWrapper = styled.div`
   width: 100%;
-  flex: 1;
   margin-top: 100px;
   padding: 30px 70px;
   padding-bottom: 100px;
