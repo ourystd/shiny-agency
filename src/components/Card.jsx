@@ -7,12 +7,15 @@ const CardLabel = styled.span`
   color: #5843e4;
   font-size: 1.2rem;
   font-weight: bold;
+  align-self: flex-start;
+  margin-bottom: 37px;
 `;
 
 const CardImage = styled.img`
-  height: 80px;
-  width: 80px;
+  height: 148px;
+  width: 148px;
   border-radius: 50%;
+  margin-bottom: 32px;
 `;
 
 const CardWrapper = styled.div`
@@ -20,11 +23,12 @@ const CardWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
+  padding: 25px;
   background-color: ${colors.backgroundLight};
   border-radius: 30px;
   width: 350px;
-  height: 325px;
+  max-height: 325px;
+  padding-bottom: 20px;
   transition: 200ms;
   &:hover {
     cursor: pointer;

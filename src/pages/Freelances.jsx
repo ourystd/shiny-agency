@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import DefaultPicture from "../assets/profile.png";
+import DefaultPicture from "../assets/default-avatar-img.png";
 import Card from "../components/Card";
 
 const freelanceProfiles = [
@@ -25,6 +25,24 @@ const freelanceProfiles = [
   },
 ];
 
+const PageWrapper = styled.div`
+  margin-top: 100px;
+  margin-bottom: 80px;
+`;
+const PageTitle = styled.h1`
+  margin-top: 0;
+  margin-bottom: 50px;
+  font-size: 30px;
+  color: #2f2e41;
+  text-align: center;
+`;
+const PageSubTitle = styled.h2`
+  margin-top: 0;
+  font-size: 20px;
+  color: #8186a0;
+  margin-bottom: 90px;
+  text-align: center;
+`;
 const CardsContainer = styled.div`
   max-width: 800px;
   display: grid;
@@ -36,8 +54,11 @@ const CardsContainer = styled.div`
 
 const Freelances = () => {
   return (
-    <div>
-      <h1>Freelances 👩‍💻👨‍💻👩‍💻</h1>
+    <PageWrapper>
+      <PageTitle>Trouvez votre prestataire</PageTitle>
+      <PageSubTitle>
+        Chez Shiny nous réunissons les meilleurs profils pour vous.
+      </PageSubTitle>
       <CardsContainer>
         {freelanceProfiles.map((profile, index) => (
           <Card
@@ -48,7 +69,7 @@ const Freelances = () => {
           />
         ))}
       </CardsContainer>
-    </div>
+    </PageWrapper>
   );
 };
 
