@@ -11,6 +11,7 @@ import Error from "./components/Error";
 import Results from "./pages/Results";
 import Freelances from "./pages/Freelances";
 import ProfileDetails from "./pages/ProfileDetails";
+import NoFreelanceNeeded from "./pages/NoFreelanceNeeded";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,6 +26,7 @@ root.render(
             <Route index element={<Freelances />} />
             <Route path=":profileId" element={<ProfileDetails />} />
           </Route>
+          <Route path="no-freelance-needed" element={<NoFreelanceNeeded />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>
