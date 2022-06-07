@@ -19,6 +19,10 @@ const ImageWrapper = styled.div`
   }
 `;
 
+const Paragraph = styled.p`
+  font-size: 20px;
+`;
+
 const NoFreelanceNeeded = () => {
   return (
     <MainWrapper>
@@ -26,7 +30,9 @@ const NoFreelanceNeeded = () => {
       <ImageWrapper>
         <img src={noFreelanceImg} alt="No freelance need" />
       </ImageWrapper>
-      <p>Il semblerait que vous n’ayez besoin d’aucune compétence</p>
+      <Paragraph>
+        Il semblerait que vous n’ayez besoin d’aucune compétence
+      </Paragraph>
     </MainWrapper>
   );
 };

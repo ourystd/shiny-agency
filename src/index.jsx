@@ -27,8 +27,8 @@ root.render(
             <Route path=":profileId" element={<ProfileDetails />} />
           </Route>
           <Route path="no-freelance-needed" element={<NoFreelanceNeeded />} />
+          <Route path="*" element={<Error />} />
         </Route>
-        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
