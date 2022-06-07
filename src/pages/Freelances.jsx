@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import DefaultPicture from "../assets/profile.png";
 import Card from "../components/Card";
 
@@ -19,16 +20,23 @@ const freelanceProfiles = [
   },
 ];
 
+const CardsContainer = styled.div`
+  display: grid;
+  gap: 24px;
+  grid-template-rows: 350px 350px;
+  grid-template-columns: repeat(3, 1fr);
+
+  &:hover {
+  }
+`;
+
 const Freelances = () => {
   console.log("Freelances", freelanceProfiles);
 
   return (
     <div>
       <h1>Freelances 👩‍💻👨‍💻👩‍💻</h1>
-      <div
-        className="freelance-profiles"
-        style={{ display: "flex", padding: 15 }}
-      >
+      <CardsContainer>
         {freelanceProfiles.map((profile, index) => (
           <Card
             key={`${profile.name}-${index}`}
@@ -37,7 +45,7 @@ const Freelances = () => {
             picture={profile.picture}
           />
         ))}
-      </div>
+      </CardsContainer>
     </div>
   );
 };
