@@ -13,7 +13,7 @@ const MainWrapper = styled.div`
   margin: 100px auto;
   padding: 100px 70px;
 
-  background-color: #f9f9fc;
+  background-color: ${({ theme }) => theme.mainWrapper};
 `;
 
 const ProfileInfos = styled.div`
@@ -33,7 +33,7 @@ const ProfileImage = styled.img`
 `;
 
 const ProfileName = styled.h2`
-  color: #2f2e41;
+  color: ${({ theme }) => theme.text};
   font-size: 31px;
   margin: 0;
 `;
@@ -43,7 +43,7 @@ const PrfileLocation = styled.span`
   font-size: 18px;
 `;
 const ProfileJob = styled.div`
-  color: #2f2e41;
+  color: ${({ theme }) => theme.text};
   font-size: 25px;
   margin-top: 20px;
 `;
@@ -54,8 +54,8 @@ const TagsList = styled.div`
 const Tag = styled.span`
   margin: 10px;
   padding: 8px 16px;
-  color: #2f2e41;
-  border: 1px solid #2f2e41;
+  color: ${({ theme }) => theme.text};
+  border: 1px solid ${({ theme }) => theme.text};
   border-radius: 8px;
   font-weight: 400;
 
@@ -68,6 +68,7 @@ const AvailableNow = styled.div`
   margin-top: 20px;
   display: flex;
   align-items: center;
+
   &::before {
     content: "";
     display: inline-block;
@@ -80,11 +81,12 @@ const AvailableNow = styled.div`
   &::after {
     content: "Disponible maintenant";
     font-weight: 500;
+    color: ${({ theme }) => theme.text};
   }
 `;
 
 const ProfilePayRate = styled.div`
-  color: #2f2e41;
+  color: ${({ theme }) => theme.text};
   font-size: 31px;
   margin-top: 27px;
 `;
