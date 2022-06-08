@@ -9,7 +9,8 @@ const MainWrapper = styled.div`
   padding-bottom: 100px;
   text-align: center;
 
-  background-color: #f9f9fc;
+  background-color: ${({ theme }) => theme.mainWrapper};
+  color: ${({ theme }) => theme.text};
 `;
 
 const ImageWrapper = styled.div`
