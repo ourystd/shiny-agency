@@ -25,7 +25,7 @@ const NeededProfiles = styled.h1`
   text-align: center;
 
   & span {
-    color: ${({ theme }) => theme.profilesNeeded};
+    color: ${({ theme }) => theme.blueToWhite};
   }
 `;
 
@@ -61,7 +61,7 @@ const ProfilesDetails = styled.div`
 `;
 
 const ProfileTitle = styled.h2`
-  color: ${({ theme }) => theme.navLink};
+  color: ${({ theme }) => theme.blueToWhite};
 `;
 
 const Results = () => {

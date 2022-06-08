@@ -11,7 +11,7 @@ const PageTitle = styled.h1`
   margin-top: 0;
   margin-bottom: 50px;
   font-size: 30px;
-  color: #2f2e41;
+  color: ${({ theme }) => theme.text};
   text-align: center;
 `;
 const PageSubTitle = styled.h2`

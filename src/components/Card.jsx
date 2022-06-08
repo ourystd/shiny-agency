@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import DefaultPicture from "../assets/profile.png";
 import styled from "styled-components";
-import colors from "../utils/style/color";
 
 const CardLabel = styled.span`
-  color: #5843e4;
+  color: ${({ theme }) => theme.blueToWhite};
   font-size: 1.2rem;
   font-weight: bold;
   align-self: flex-start;
@@ -24,7 +23,7 @@ const CardWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 25px;
-  background-color: ${colors.backgroundLight};
+  background-color: ${({ theme }) => theme.card};
   border-radius: 25px;
   width: 350px;
   max-height: 325px;
@@ -36,12 +35,16 @@ const CardWrapper = styled.div`
   }
 `;
 
+const Name = styled.span`
+  color: ${({ theme }) => theme.text};
+`;
+
 const Card = ({ label, title, picture }) => {
   return (
     <CardWrapper>
       <CardLabel>{label}</CardLabel>
       <CardImage src={picture} alt="freelance" />
-      <span style={{ color: "#2F2E41" }}>{title}</span>
+      <Name>{title}</Name>
     </CardWrapper>
   );
 };

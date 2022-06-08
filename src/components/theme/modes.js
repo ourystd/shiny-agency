@@ -8,8 +8,9 @@ export const lightTheme = {
   navLink: "#8186a0",
   text: "#2f2e41",
   highContrastText: "#000",
-  profilesNeeded: "#5843e4",
   rolesDesc: "#8186a0",
+  card: "#F9F9FC",
+  blueToWhite: "#5843e4",
 };
 export const darkTheme = {
   bodyBg: "#2F2E41",
@@ -21,6 +22,7 @@ export const darkTheme = {
   navLink: "#fff",
   text: "#fff",
   highContrastText: "#fff",
-  profilesNeed: "#fff",
   rolesDesc: "#fff",
+  card: "#4F4C6B",
+  blueToWhite: "#fff",
 };
