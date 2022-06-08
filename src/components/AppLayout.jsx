@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { ThemeProvider } from "styled-components";
@@ -6,6 +5,7 @@ import Header from "./Header";
 import { GlobalStyle } from "./theme/global";
 import { darkTheme, lightTheme } from "./theme/modes";
 import { FiSun, FiMoon } from "react-icons/fi";
+import { useLocalStorage } from "../utils/hooks";
 
 const MainLayoutWrapper = styled.div`
   padding: 2rem 3rem;
@@ -40,7 +40,8 @@ const ThemeToggler = styled.button`
 `;
 
 const AppLayout = () => {
-  const [theme, setTheme] = useState(
+  const [theme, setTheme] = useLocalStorage(
+    "shiny::theme",
     window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
