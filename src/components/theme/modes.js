@@ -7,6 +7,9 @@ export const lightTheme = {
   toggleIcon: "#212121",
   navLink: "#8186a0",
   text: "#2f2e41",
+  highContrastText: "#000",
+  profilesNeeded: "#5843e4",
+  rolesDesc: "#8186a0",
 };
 export const darkTheme = {
   bodyBg: "#2F2E41",
@@ -17,4 +20,7 @@ export const darkTheme = {
   toggleIcon: "#b1b1b1 ",
   navLink: "#fff",
   text: "#fff",
+  highContrastText: "#fff",
+  profilesNeed: "#fff",
+  rolesDesc: "#fff",
 };

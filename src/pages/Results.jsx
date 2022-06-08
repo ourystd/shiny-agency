@@ -6,7 +6,7 @@ const MainWrapper = styled.div`
   margin-top: 100px;
   padding: 100px 70px;
 
-  background-color: #f9f9fc;
+  background-color: ${({ theme }) => theme.mainWrapper};
 `;
 
 const ContentWrapper = styled.div`
@@ -15,6 +15,7 @@ const ContentWrapper = styled.div`
   align-items: center;
   max-width: 720px;
   margin: 0 auto;
+  color: ${({ theme }) => theme.highContrastText};
 `;
 
 const NeededProfiles = styled.h1`
@@ -24,7 +25,7 @@ const NeededProfiles = styled.h1`
   text-align: center;
 
   & span {
-    color: #5843e4;
+    color: ${({ theme }) => theme.profilesNeeded};
   }
 `;
 
@@ -55,12 +56,12 @@ const ProfilesDetails = styled.div`
   }
 
   p {
-    color: #8186a0;
+    color: ${({ theme }) => theme.rolesDesc};
   }
 `;
 
 const ProfileTitle = styled.h2`
-  color: #5843e4;
+  color: ${({ theme }) => theme.navLink};
 `;
 
 const Results = () => {
