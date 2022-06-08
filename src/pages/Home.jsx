@@ -8,7 +8,8 @@ const MainWrapper = styled.div`
   padding: 30px 70px;
   padding-bottom: 100px;
 
-  background: #f9f9fc url(${homeMainImg}) no-repeat center;
+  background: ${({ theme }) => theme.mainWrapper} url(${homeMainImg}) no-repeat
+    center;
   background-position-x: 90%;
 `;
 
@@ -20,7 +21,7 @@ const FLexWrapper = styled.div`
   p {
     font-size: 50px;
     line-height: 80.25px;
-    color: #2f2e41;
+    color: ${({ theme }) => theme.text};
     max-width: 550px;
   }
 `;

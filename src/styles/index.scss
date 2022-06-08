@@ -21,7 +21,6 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   font-weight: bold;
-  background-color: #fff;
 }
 
 ::-webkit-scrollbar {
@@ -29,7 +28,6 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: linear-gradient(180deg, #2f6ed3, #5095e4, #5095e4, #2f6ed3);
   box-shadow: none;
   border: 0;
   outline: 0;
@@ -38,9 +36,4 @@ body {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 30px;
-  background-color: rgba(#8186a0, 0.52);
-
-  &:hover {
-    background-color: rgba(#0a468a, 0.65);
-  }
 }

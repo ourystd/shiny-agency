@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import colors from "../utils/style/color";
 import lightLogo from "../assets/shiny-logo-light.png";
+import darkLogo from "../assets/shiny-logo-dark.png";
 
 const HeaderWrapper = styled.header`
   width: 100%;
@@ -16,6 +17,7 @@ const LogoImg = styled.img`
   max-width: 100%;
   max-height: 100%;
   margin-left: -7px;
+  transition: 0.35s;
 `;
 const NavItems = styled.ul`
   display: flex;
@@ -28,7 +30,7 @@ const NavItems = styled.ul`
 `;
 const StyledLink = styled(NavLink)`
   padding: 15px;
-  color: #8186a0;
+  color: ${({ theme }) => theme.navLink};
   font-size: 20px;
   font-weight: 700;
   text-decoration: none;
@@ -58,11 +60,13 @@ const StyledLink = styled(NavLink)`
     `}
 `;
 
-const Header = () => {
+const Header = ({ themeMode }) => {
+  const logo = themeMode === "light" ? lightLogo : darkLogo;
+
   return (
     <HeaderWrapper>
       <CompanyLogo to="/">
-        <LogoImg src={lightLogo} alt="Shiny Agency" />
+        <LogoImg src={logo} alt="Shiny Agency" />
       </CompanyLogo>
       <nav>
         <NavItems>

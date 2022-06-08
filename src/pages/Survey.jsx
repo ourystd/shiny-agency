@@ -5,7 +5,7 @@ const MainWrapper = styled.div`
   max-width: 750px;
   margin: 100px auto;
   text-align: center;
-  color: #2f2e41;
+  color: ${({ theme }) => theme.text};
 `;
 
 const QuestionNumber = styled.h2`
@@ -29,12 +29,13 @@ const AnswersList = styled.div`
 const Answer = styled.button`
   min-width: 200px;
   min-height: 80px;
-  background-color: #f9f9fc;
+  background-color: ${({ theme }) => theme.mainWrapper};
   border-radius: 30px;
   font-size: 25px;
   border: 1px solid transparent;
   padding: 15px 30px;
   margin-bottom: 60px;
+  color: ${({ theme }) => theme.text};
   transition: border-color 0.35s;
 
   &:hover {
@@ -51,7 +52,7 @@ const QuestionsNavigation = styled.div`
   font-weight: 400;
 
   a:not(:hover) {
-    color: #2f2e41;
+    color: ${({ theme }) => theme.text};
   }
 `;
 
