@@ -74,9 +74,9 @@ const SpaceFiller = () => <span style={{ width: 100 }} />;
 
 const Survey = () => {
   const questionNumber = parseInt(useParams().questionNumber, 10);
-  const [questions, setQuestions] = useState(null);
   const prevQuestionNum = questionNumber - 1;
   const nextQuestionNum = questionNumber + 1;
+  const [questions, setQuestions] = useState(null);
 
   useEffect(() => {
     fetch(`http://localhost:8000/survey/`)

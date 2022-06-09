@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
-import { freelanceProfiles } from "../data/freelanceProfiles";
+import { Loader } from "../utils/style/Atom";
 
 const PageWrapper = styled.div`
   margin-top: 100px;
@@ -31,21 +32,43 @@ const CardsContainer = styled.div`
 `;
 
 const Freelances = () => {
+  const [profiles, setProfiles] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/freelances/`)
+      .then((res) => res.json())
+      .then(({ freelancersList }) => setProfiles(freelancersList))
+      .catch((err) => console.log(err));
+  }, [setProfiles]);
+
   return (
     <PageWrapper>
       <PageTitle>Trouvez votre prestataire</PageTitle>
       <PageSubTitle>
         Chez Shiny nous réunissons les meilleurs profils pour vous.
       </PageSubTitle>
+      {(!profiles || !profiles.length) && (
+        <div
+          style={{
+            margin: "60px auto",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Loader />
+        </div>
+      )}
       <CardsContainer>
-        {freelanceProfiles.map((profile, index) => (
+        {profiles.map((profile, index) => (
           <Link
             key={`${profile.name}-${index}`}
             to={`/freelances/${profile.id}`}
             style={{ textDecoration: "none" }}
           >
             <Card
-              label={profile.jobTitle}
+              label={profile.job}
               title={profile.name}
               picture={profile.picture}
             />
