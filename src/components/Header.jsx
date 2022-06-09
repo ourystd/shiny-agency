@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
-import colors from "../utils/style/color";
+import colors from "../utils/style/colors";
 import lightLogo from "../assets/shiny-logo-light.png";
 import darkLogo from "../assets/shiny-logo-dark.png";
 

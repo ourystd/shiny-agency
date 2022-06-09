@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { Loader } from "../utils/style/Atom";
 
 const MainWrapper = styled.div`
   max-width: 750px;
@@ -12,7 +14,7 @@ const QuestionNumber = styled.h2`
   text-decoration: underline #5843e4;
 `;
 
-const QuestionText = styled.p`
+const QuestionText = styled.div`
   margin: 60px auto;
   font-size: 20px;
   font-weight: 400;
@@ -51,50 +53,63 @@ const QuestionsNavigation = styled.div`
   font-size: 18px;
   font-weight: 400;
 
+  a {
+    margin: 10px;
+  }
+
   a:not(:hover) {
     color: ${({ theme }) => theme.text};
   }
+`;
+
+const LoadingWrapper = styled.div`
+  width: 100%;
+  margin: 60px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SpaceFiller = () => <span style={{ width: 100 }} />;
 
 const Survey = () => {
   const questionNumber = parseInt(useParams().questionNumber, 10);
+  const [questions, setQuestions] = useState(null);
+  const prevQuestionNum = questionNumber - 1;
+  const nextQuestionNum = questionNumber + 1;
 
-  const prevQuestion = questionNumber - 1;
-  const nextQuestion = questionNumber + 1;
+  useEffect(() => {
+    fetch(`http://localhost:8000/survey/`)
+      .then((res) => res.json())
+      .then(({ surveyData }) => setQuestions(surveyData))
+      .catch((err) => console.log(err));
+  }, [setQuestions]);
 
-  const navStyle = {
-    margin: 10,
-  };
+  const totalQuestions = questions ? Object.keys(questions).length : 0;
 
   return (
     <MainWrapper>
       <QuestionNumber>Question {questionNumber}</QuestionNumber>
-      <QuestionText>
-        Votre application doit-elle impérativement apparaître en premier dans
-        les résultats de recherche ?
-      </QuestionText>
+      {questions && <QuestionText> {questions[questionNumber]}</QuestionText>}
+      {!questions && (
+        <LoadingWrapper>
+          <Loader />
+        </LoadingWrapper>
+      )}
       <AnswersList>
         <Answer>Oui</Answer>
         <Answer>Non</Answer>
       </AnswersList>
       <QuestionsNavigation>
-        {!!prevQuestion ? (
-          <Link style={navStyle} to={`/survey/${prevQuestion}`}>
-            Précédent
-          </Link>
+        {!!prevQuestionNum ? (
+          <Link to={`/survey/${prevQuestionNum}`}>Précédent</Link>
         ) : (
           <SpaceFiller />
         )}
-        {nextQuestion <= 10 ? (
-          <Link style={navStyle} to={`/survey/${nextQuestion}`}>
-            Suivant
-          </Link>
+        {nextQuestionNum <= totalQuestions ? (
+          <Link to={`/survey/${nextQuestionNum}`}>Suivant</Link>
         ) : (
-          <Link style={navStyle} to={`/results`}>
-            Résultats
-          </Link>
+          <Link to={`/results`}>Résultats</Link>
         )}
       </QuestionsNavigation>
     </MainWrapper>
