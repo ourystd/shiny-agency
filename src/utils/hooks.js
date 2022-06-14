@@ -37,10 +37,10 @@ export const useFetch = (url, defaultDataValue = null) => {
   const [state, setState] = useState({
     data: defaultDataValue,
     status: FETCH_STATUS.IDLE,
-    error: null,
   });
 
   useEffect(() => {
+    setState((prevState) => ({ ...prevState, status: FETCH_STATUS.PENDING }));
     fetch(url)
       .then((res) => res.json())
       .then((data) =>
@@ -60,5 +60,8 @@ export const useFetch = (url, defaultDataValue = null) => {
       );
   }, [setState, url]);
 
-  return state;
+  const error = state.status === FETCH_STATUS.ERROR;
+  const isLoading = state.status === FETCH_STATUS.PENDING;
+
+  return { ...state, error, isLoading };
 };

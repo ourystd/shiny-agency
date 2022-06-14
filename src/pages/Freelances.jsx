@@ -32,7 +32,10 @@ const CardsContainer = styled.div`
 `;
 
 const Freelances = () => {
-  const { data } = useFetch(`http://localhost:8000/freelances/`, []);
+  const { data, error, isLoading } = useFetch(
+    `http://localhost:8000/freelances/`,
+    []
+  );
   const { freelancersList } = data;
 
   return (
@@ -41,7 +44,21 @@ const Freelances = () => {
       <PageSubTitle>
         Chez Shiny nous réunissons les meilleurs profils pour vous.
       </PageSubTitle>
-      {(!freelancersList || !freelancersList?.length) && (
+      {error && (
+        <div
+          style={{
+            margin: "60px auto",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "red",
+          }}
+        >
+          <p>Une erreur est sur venue lors de la récupération des données.</p>
+        </div>
+      )}
+      {isLoading && !freelancersList?.length && (
         <div
           style={{
             margin: "60px auto",
