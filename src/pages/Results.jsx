@@ -1,5 +1,8 @@
+import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useSurvey } from "../utils/context";
+import { Loader } from "../utils/style/Atom";
 
 const MainWrapper = styled.div`
   width: 100%;
@@ -62,36 +65,59 @@ const ProfilesDetails = styled.div`
 
 const ProfileTitle = styled.h2`
   color: ${({ theme }) => theme.blueToWhite};
+  text-transform: capitalize;
 `;
 
 const Results = () => {
+  const { answers } = useSurvey();
+  const [results, setResults] = useState([]);
+  let query = "";
+
+  for (let key in answers) {
+    query += `a${key}=${answers[key]}&`;
+  }
+
+  // remove last &
+  query = query.slice(0, -1);
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/results/?${query}`)
+      .then((res) => res.json())
+      .then(({ resultsData }) => {
+        console.log({ resultsData });
+        setResults(resultsData);
+      })
+      .catch((err) => console.log(err));
+  }, [query]);
+
+  console.log({ results, answers, query });
+
   return (
     <MainWrapper>
       <ContentWrapper>
         <NeededProfiles>
           Les compétences dont vous avez besoin :{" "}
-          <span>UX Design, frontend, backend</span>
+          <span>
+            {results.map(
+              ({ title }, index) =>
+                `${title}${index < results.length - 1 ? ", " : ""}`
+            )}
+          </span>
         </NeededProfiles>
         <LinkToProfiles to="/freelances">Découvrez nos profils</LinkToProfiles>
 
         <ProfilesDetails>
-          <ProfileTitle>UX Design</ProfileTitle>
-          <p>
-            Le rôle de l’UX est de Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore lome.
-          </p>
-          <ProfileTitle>Frontend</ProfileTitle>
-          <p>
-            Dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo vie.
-          </p>
-          <ProfileTitle>Backend</ProfileTitle>
-          <p>
-            Consequat duis aute irure dolor in reprehenderit. In voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </p>
+          {results.map(({ title, description }) => (
+            <Fragment key={title}>
+              <ProfileTitle>{title}</ProfileTitle>
+              <p>{description}</p>
+            </Fragment>
+          ))}
+          {(!results || !results.length) && (
+            <div>
+              <Loader />
+            </div>
+          )}
         </ProfilesDetails>
       </ContentWrapper>
     </MainWrapper>

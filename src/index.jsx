@@ -12,6 +12,7 @@ import Results from "./pages/Results";
 import Freelances from "./pages/Freelances";
 import ProfileDetails from "./pages/ProfileDetails";
 import NoFreelanceNeeded from "./pages/NoFreelanceNeeded";
+import { SurveyProvider } from "./utils/context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,8 +21,22 @@ root.render(
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
-          <Route path="survey/:questionNumber" element={<Survey />} />
-          <Route path="results" element={<Results />} />
+          <Route
+            path="survey/:questionNumber"
+            element={
+              <SurveyProvider>
+                <Survey />
+              </SurveyProvider>
+            }
+          />
+          <Route
+            path="results"
+            element={
+              <SurveyProvider>
+                <Results />
+              </SurveyProvider>
+            }
+          />
           <Route path="freelances">
             <Route index element={<Freelances />} />
             <Route path=":profileId" element={<ProfileDetails />} />

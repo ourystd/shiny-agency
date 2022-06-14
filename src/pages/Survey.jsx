@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useSurvey } from "../utils/context";
 import { Loader } from "../utils/style/Atom";
 
 const MainWrapper = styled.div`
@@ -77,6 +78,8 @@ const Survey = () => {
   const prevQuestionNum = questionNumber - 1;
   const nextQuestionNum = questionNumber + 1;
   const [questions, setQuestions] = useState(null);
+  const { persitAnswer } = useSurvey();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:8000/survey/`)
@@ -86,6 +89,12 @@ const Survey = () => {
   }, [setQuestions]);
 
   const totalQuestions = questions ? Object.keys(questions).length : 0;
+
+  const registerAnswer = (answer) => {
+    persitAnswer({ [questionNumber]: answer });
+    if (nextQuestionNum <= totalQuestions)
+      navigate(`/survey/${nextQuestionNum}`);
+  };
 
   return (
     <MainWrapper>
@@ -97,8 +106,8 @@ const Survey = () => {
         </LoadingWrapper>
       )}
       <AnswersList>
-        <Answer>Oui</Answer>
-        <Answer>Non</Answer>
+        <Answer onClick={() => registerAnswer(true)}>Oui</Answer>
+        <Answer onClick={() => registerAnswer(false)}>Non</Answer>
       </AnswersList>
       <QuestionsNavigation>
         {!!prevQuestionNum ? (
