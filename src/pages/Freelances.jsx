@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
+import { useFetch } from "../utils/hooks";
 import { Loader } from "../utils/style/Atom";
 
 const PageWrapper = styled.div`
@@ -32,14 +32,8 @@ const CardsContainer = styled.div`
 `;
 
 const Freelances = () => {
-  const [profiles, setProfiles] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:8000/freelances/`)
-      .then((res) => res.json())
-      .then(({ freelancersList }) => setProfiles(freelancersList))
-      .catch((err) => console.log(err));
-  }, [setProfiles]);
+  const { data } = useFetch(`http://localhost:8000/freelances/`, []);
+  const { freelancersList } = data;
 
   return (
     <PageWrapper>
@@ -47,7 +41,7 @@ const Freelances = () => {
       <PageSubTitle>
         Chez Shiny nous réunissons les meilleurs profils pour vous.
       </PageSubTitle>
-      {(!profiles || !profiles.length) && (
+      {(!freelancersList || !freelancersList?.length) && (
         <div
           style={{
             margin: "60px auto",
@@ -61,7 +55,7 @@ const Freelances = () => {
         </div>
       )}
       <CardsContainer>
-        {profiles.map((profile, index) => (
+        {freelancersList?.map((profile, index) => (
           <Link
             key={`${profile.name}-${index}`}
             to={`/freelances/${profile.id}`}

@@ -26,3 +26,39 @@ export const useLocalStorage = (keyName, defaultValue) => {
 
   return [storedValue, setStoredValue];
 };
+
+const FETCH_STATUS = {
+  IDLE: "idle",
+  PENDING: "pending",
+  SUCCESS: "success",
+  ERROR: "error",
+};
+export const useFetch = (url, defaultDataValue = null) => {
+  const [state, setState] = useState({
+    data: defaultDataValue,
+    status: FETCH_STATUS.IDLE,
+    error: null,
+  });
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) =>
+        setState((prevState) => ({
+          ...prevState,
+          data,
+          status: FETCH_STATUS.SUCCESS,
+          error: null,
+        }))
+      )
+      .catch((err) =>
+        setState((prevState) => ({
+          ...prevState,
+          status: FETCH_STATUS.ERROR,
+          error: err,
+        }))
+      );
+  }, [setState, url]);
+
+  return state;
+};

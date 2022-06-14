@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useSurvey } from "../utils/context";
+import { useFetch } from "../utils/hooks";
 import { Loader } from "../utils/style/Atom";
 
 const MainWrapper = styled.div`
@@ -77,16 +77,11 @@ const Survey = () => {
   const questionNumber = parseInt(useParams().questionNumber, 10);
   const prevQuestionNum = questionNumber - 1;
   const nextQuestionNum = questionNumber + 1;
-  const [questions, setQuestions] = useState(null);
   const { persitAnswer } = useSurvey();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch(`http://localhost:8000/survey/`)
-      .then((res) => res.json())
-      .then(({ surveyData }) => setQuestions(surveyData))
-      .catch((err) => console.log(err));
-  }, [setQuestions]);
+  const { data } = useFetch(`http://localhost:8000/survey/`, []);
+  const { surveyData: questions } = data;
 
   const totalQuestions = questions ? Object.keys(questions).length : 0;
 

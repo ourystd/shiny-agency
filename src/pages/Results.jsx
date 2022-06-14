@@ -1,7 +1,8 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useSurvey } from "../utils/context";
+import { useFetch } from "../utils/hooks";
 import { Loader } from "../utils/style/Atom";
 
 const MainWrapper = styled.div`
@@ -70,7 +71,6 @@ const ProfileTitle = styled.h2`
 
 const Results = () => {
   const { answers } = useSurvey();
-  const [results, setResults] = useState([]);
   let query = "";
 
   for (let key in answers) {
@@ -79,18 +79,8 @@ const Results = () => {
 
   // remove last &
   query = query.slice(0, -1);
-
-  useEffect(() => {
-    fetch(`http://localhost:8000/results/?${query}`)
-      .then((res) => res.json())
-      .then(({ resultsData }) => {
-        console.log({ resultsData });
-        setResults(resultsData);
-      })
-      .catch((err) => console.log(err));
-  }, [query]);
-
-  console.log({ results, answers, query });
+  const { data } = useFetch(`http://localhost:8000/results/?${query}`, []);
+  const { resultsData: results } = data;
 
   return (
     <MainWrapper>
@@ -98,7 +88,7 @@ const Results = () => {
         <NeededProfiles>
           Les compétences dont vous avez besoin :{" "}
           <span>
-            {results.map(
+            {results?.map(
               ({ title }, index) =>
                 `${title}${index < results.length - 1 ? ", " : ""}`
             )}
@@ -107,7 +97,7 @@ const Results = () => {
         <LinkToProfiles to="/freelances">Découvrez nos profils</LinkToProfiles>
 
         <ProfilesDetails>
-          {results.map(({ title, description }) => (
+          {results?.map(({ title, description }) => (
             <Fragment key={title}>
               <ProfileTitle>{title}</ProfileTitle>
               <p>{description}</p>
