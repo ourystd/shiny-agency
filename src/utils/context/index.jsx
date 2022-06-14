@@ -1,9 +1,9 @@
-import { createContext, useContext, useState } from "react";
-
+import { createContext, useContext } from "react";
+import { useLocalStorage } from "../hooks";
 const SurveyContext = createContext();
 
 export const SurveyProvider = ({ children }) => {
-  const [answers, setAnswers] = useState(null);
+  const [answers, setAnswers] = useLocalStorage("shiny::answers", "");
 
   const persitAnswer = (newAnswer) =>
     setAnswers((currentAnswers) => ({
