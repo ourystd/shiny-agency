@@ -6,6 +6,7 @@ import { GlobalStyle } from "./theme/global";
 import { darkTheme, lightTheme } from "./theme/modes";
 import { FiSun, FiMoon } from "react-icons/fi";
 import { useLocalStorage } from "../utils/hooks";
+import Footer from "./Footer";
 
 const MainLayoutWrapper = styled.div`
   padding: 2rem 3rem;
@@ -63,6 +64,7 @@ const AppLayout = () => {
         <MainContent>
           <Outlet />
         </MainContent>
+        <Footer />
       </MainLayoutWrapper>
     </ThemeProvider>
   );
