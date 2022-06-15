@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useSurvey } from "../utils/context";
-import { formatJobList } from "../utils/format";
+import { formatJobList, formatQueryParams } from "../utils/format";
 import { useFetch } from "../utils/hooks";
 import { Loader } from "../utils/style/Atom";
 
@@ -72,14 +72,7 @@ const ProfileTitle = styled.h2`
 
 const Results = () => {
   const { answers } = useSurvey();
-  let query = "";
-
-  for (let key in answers) {
-    query += `a${key}=${answers[key]}&`;
-  }
-
-  // remove last &
-  query = query.slice(0, -1);
+  const query = formatQueryParams(answers);
   const { data } = useFetch(`http://localhost:8000/results/?${query}`, []);
   const { resultsData: results } = data;
 
