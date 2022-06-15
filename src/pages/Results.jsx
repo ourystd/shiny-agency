@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useSurvey } from "../utils/context";
+import { formatJobList } from "../utils/format";
 import { useFetch } from "../utils/hooks";
 import { Loader } from "../utils/style/Atom";
 
@@ -88,9 +89,8 @@ const Results = () => {
         <NeededProfiles>
           Les compétences dont vous avez besoin :{" "}
           <span>
-            {results?.map(
-              ({ title }, index) =>
-                `${title}${index < results.length - 1 ? ", " : ""}`
+            {results?.map(({ title }, index) =>
+              formatJobList(title, index, results.length)
             )}
           </span>
         </NeededProfiles>
