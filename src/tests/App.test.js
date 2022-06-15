@@ -1,8 +1,8 @@
-// import { render, screen } from "@testing-library/react";
-// import Home from "../pages/Home";
+import { render } from "@testing-library/react";
+import Home from "../pages/Home";
 
-// test("renders learn react link", () => {
-//   render(<Home />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
+describe("Home page component:", () => {
+  it("renders without crashing", async () => {
+    render(<Home />);
+  });
+});
