@@ -3,6 +3,8 @@ import styled from "styled-components";
 import colors from "../utils/style/colors";
 import lightLogo from "../assets/shiny-logo-light.png";
 import darkLogo from "../assets/shiny-logo-dark.png";
+import { useSelector } from "react-redux";
+import { selectTheme } from "../utils/selectors";
 
 const HeaderWrapper = styled.header`
   width: 100%;
@@ -61,7 +63,10 @@ const StyledLink = styled(NavLink)`
 `;
 
 const Header = ({ themeMode }) => {
-  const logo = themeMode === "light" ? lightLogo : darkLogo;
+  const theme = useSelector(selectTheme);
+  const logo = theme === "light" ? lightLogo : darkLogo;
+
+  console.log({ themeMode });
 
   return (
     <HeaderWrapper>
