@@ -5,6 +5,9 @@ const storeReducer = combineReducers({
   theme: themeReducer,
 });
 
-export const store = createStore(storeReducer);
+const reduxDevtools =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+export const store = createStore(storeReducer, reduxDevtools);
 
 console.log({ store: store.getState() });
