@@ -1,7 +1,12 @@
+import { useEffect } from "react";
+import { useStore } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
+import { fetchOrUpdateFreelances } from "../features/freelances";
 import { useFetch } from "../utils/hooks";
+import { selectFreelances } from "../utils/selectors";
 import { Loader } from "../utils/style/Atom";
 
 const PageWrapper = styled.div`
@@ -32,11 +37,19 @@ const CardsContainer = styled.div`
 `;
 
 const Freelances = () => {
-  const { data, error, isLoading } = useFetch(
-    `http://localhost:8000/freelances/`,
-    []
-  );
-  const { freelancersList } = data;
+  // const { data, error, isLoading } = useFetch(
+  //   `http://localhost:8000/freelances/`,
+  //   []
+  // );
+  const freelances = useSelector(selectFreelances);
+  const { freelancersList } = freelances.data || {};
+  const isError = Boolean(freelances.error);
+  const isLoading = ["idle", "pending"].includes(freelances.status);
+
+  const store = useStore();
+  useEffect(() => {
+    fetchOrUpdateFreelances(store);
+  }, [store]);
 
   return (
     <PageWrapper>
@@ -44,7 +57,7 @@ const Freelances = () => {
       <PageSubTitle>
         Chez Shiny nous réunissons les meilleurs profils pour vous.
       </PageSubTitle>
-      {error && (
+      {isError && (
         <div
           style={{
             margin: "60px auto",

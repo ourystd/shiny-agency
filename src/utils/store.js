@@ -1,8 +1,10 @@
 import { createStore, combineReducers } from "redux";
-import { themeReducer } from "../features/theme";
+import freelancesReducer from "../features/freelances";
+import themeReducer from "../features/theme";
 
 const storeReducer = combineReducers({
   theme: themeReducer,
+  freelances: freelancesReducer,
 });
 
 const reduxDevtools =
