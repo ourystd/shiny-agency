@@ -10,7 +10,7 @@ import Footer from "./Footer";
 import { selectTheme } from "../utils/selectors";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { toggleThemeAction } from "../features/theme";
+import { toggleTheme } from "../features/theme";
 import { useEffect } from "react";
 
 const MainLayoutWrapper = styled.div`
@@ -57,11 +57,6 @@ const AppLayout = () => {
   const rTheme = useSelector(selectTheme);
   const dispatch = useDispatch();
 
-  const toggleTheme = () => {
-    // setTheme(theme === "light" ? "dark" : "light")
-    dispatch(toggleThemeAction());
-  };
-
   useEffect(() => {
     // console.log({ rTheme });
   }, [rTheme]);
@@ -73,7 +68,9 @@ const AppLayout = () => {
   return (
     <ThemeProvider theme={rTheme === "light" ? lightTheme : darkTheme}>
       <GlobalStyle />
-      <ThemeToggler onClick={toggleTheme}>{icon}</ThemeToggler>
+      <ThemeToggler onClick={dispatch.bind(null, toggleTheme())}>
+        {icon}
+      </ThemeToggler>
       <MainLayoutWrapper>
         <Header themeMode={rTheme} />
         <MainContent>
