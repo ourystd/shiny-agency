@@ -1,11 +1,12 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useStore } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
 import { fetchOrUpdateFreelances } from "../features/freelances";
-import { useFetch } from "../utils/hooks";
+// import { useFetch } from "../utils/hooks";
 import { selectFreelances } from "../utils/selectors";
 import { Loader } from "../utils/style/Atom";
 
@@ -46,10 +47,10 @@ const Freelances = () => {
   const isError = Boolean(freelances.error);
   const isLoading = ["idle", "pending"].includes(freelances.status);
 
-  const store = useStore();
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetchOrUpdateFreelances(store);
-  }, [store]);
+    dispatch(fetchOrUpdateFreelances);
+  }, [dispatch]);
 
   return (
     <PageWrapper>

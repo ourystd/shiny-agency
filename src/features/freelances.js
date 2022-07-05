@@ -49,18 +49,18 @@ export default function freelancesReducer(state = initialState, action) {
   });
 }
 
-export const fetchOrUpdateFreelances = async (store) => {
-  const currentStatus = selectFreelances(store.getState()).status;
+export const fetchOrUpdateFreelances = async (dispatch, getState) => {
+  const currentStatus = selectFreelances(getState()).status;
 
   if (["pending", "updating"].includes(currentStatus)) return;
 
-  store.dispatch(frealancesFetching());
+  dispatch(frealancesFetching());
 
   try {
     const response = await fetch(`http://localhost:8000/freelances/`);
     const data = await response.json();
-    store.dispatch(frealancesResolved(data));
+    dispatch(frealancesResolved(data));
   } catch (error) {
-    store.dispatch(frealancesRejected(error));
+    dispatch(frealancesRejected(error));
   }
 };
