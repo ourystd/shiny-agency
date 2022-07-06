@@ -1,32 +1,22 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-// Actions
 const DEFAULT_THEME = "light";
 
-export const toggleTheme = createAction("theme/toggle");
-export const setTheme = createAction("theme/set");
+const { actions, reducer } = createSlice({
+  name: "theme",
+  initialState: DEFAULT_THEME,
 
-// setTheme("dark") ==> ({type: "theme/set", payload: "dark"})
-
-// Reducer
-
-export default createReducer(DEFAULT_THEME, (builder) => {
-  return builder
-    .addCase(toggleTheme, (state) => {
+  reducers: {
+    toggle: (state) => {
       return state === "light" ? "dark" : "light";
-    })
-    .addCase(setTheme, (_, action) => {
+    },
+    set: (_, action) => {
       return action.payload;
-    });
+    },
+    reset: () => DEFAULT_THEME,
+  },
 });
 
-// export default function themeReducer(state = DEFAULT_THEME, action) {
-//   if (action.type === toggleTheme.toString()) {
-//     return state === "light" ? "dark" : "light";
-//   }
-//   if (action.type === setTheme.toString()) {
-//     return action.payload;
-//   }
+export const { toggle, set, reset } = actions;
 
-//   return state;
-// }
+export default reducer;
