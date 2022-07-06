@@ -10,7 +10,7 @@ import Footer from "./Footer";
 import { selectTheme } from "../utils/selectors";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import * as themeActions from "../features/theme";
+import { themeActions } from "../features/theme";
 import { useEffect } from "react";
 
 const MainLayoutWrapper = styled.div`
